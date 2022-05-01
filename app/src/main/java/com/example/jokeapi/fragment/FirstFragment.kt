@@ -4,18 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import com.example.jokeapi.JokeAdapter
+import com.example.jokeapi.JokePagingAdapter
 import com.example.jokeapi.viewmodel.MainViewModel
 import com.example.jokeapi.api.AppModule
 import com.example.jokeapi.databinding.FragmentFirstBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 
 class FirstFragment : Fragment() {
-    private val jokeAdapter = JokeAdapter()
+    private val jokeAdapter = JokePagingAdapter()
     private var _binding: FragmentFirstBinding? = null
     private val viewModel: MainViewModel by viewModels()
     override fun onCreateView(
@@ -30,11 +36,16 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.fetchInitialData()
         _binding?.recyclerView?.adapter = jokeAdapter
-        viewModel.jokeLiveData.observe(viewLifecycleOwner) { jokes ->
-            jokeAdapter.jokeList = jokes
-            jokeAdapter.notifyDataSetChanged()
+        viewModel.fetchInitialData().observe(viewLifecycleOwner) { jokes ->
+          lifecycleScope.launch{
+              jokeAdapter.submitData(jokes)
+          }
+        }
+        jokeAdapter.addLoadStateListener {
+            val loading =
+            it.refresh is LoadState.Loading || it.append is LoadState.Loading || it.prepend is LoadState.Loading
+            _binding?.progressBar?.isVisible=loading
         }
     }
 

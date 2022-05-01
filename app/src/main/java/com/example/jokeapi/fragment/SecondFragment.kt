@@ -31,18 +31,19 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding?.progressBar?.isVisible=true
-        _binding?.swipeRefresh?.setOnRefreshListener{
+        _binding?.progressBar?.isVisible = true
+        _binding?.swipeRefresh?.setOnRefreshListener {
             viewModel.fetchInitialData()
-            _binding?.swipeRefresh?.isRefreshing=false
-            _binding?.progressBar?.isVisible=true
+            _binding?.swipeRefresh?.isRefreshing = false
+
+            _binding?.progressBar?.isVisible = true
         }
         viewModel.fetchInitialData()
         _binding?.recyclerView?.adapter = jokeAdapter
         viewModel.jokeLiveData.observe(viewLifecycleOwner) { jokes ->
             jokeAdapter.jokeList = jokes
             jokeAdapter.notifyDataSetChanged()
-            _binding?.progressBar?.isVisible=false
+            _binding?.progressBar?.isVisible = false
         }
     }
 
