@@ -53,7 +53,7 @@ class HostFragment : Fragment() {
 
     fun setFragment(fragment: Fragment) = _binding?.run {
 
-        parentFragmentManager.beginTransaction().replace(fragmentContainerView.id, fragment)
+        childFragmentManager.beginTransaction().replace(fragmentContainerView.id, fragment)
             .addToBackStack(null).commit()
     }
 
