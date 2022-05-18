@@ -8,6 +8,6 @@ import com.example.jokeapi.api.data.JokeResponse
     entities = [JokeResponse::class],
     version = 1
 )
-abstract class JokeDB: RoomDatabase() {
+abstract class JokeDB : RoomDatabase() {
     abstract fun getJokeDAO(): JokeDAO
 }

@@ -1,4 +1,4 @@
-package com.example.jokeapi
+package com.example.jokeapi.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,21 +8,25 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
+import com.example.jokeapi.R
 import com.example.jokeapi.api.data.JokeResponse
 import com.example.jokeapi.databinding.JokeItemViewBinding
 
-class JokePagingAdapter: PagingDataAdapter<JokeResponse,RecyclerView.ViewHolder>(diffCallback = JokeDiffer()) {
-    class JokeDiffer: DiffUtil.ItemCallback<JokeResponse>(){
+class JokePagingAdapter :
+    PagingDataAdapter<JokeResponse, RecyclerView.ViewHolder>(diffCallback = JokeDiffer()) {
+    class JokeDiffer : DiffUtil.ItemCallback<JokeResponse>() {
         override fun areItemsTheSame(oldItem: JokeResponse, newItem: JokeResponse): Boolean {
-            return oldItem.id==newItem.id
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: JokeResponse, newItem: JokeResponse): Boolean {
-            return oldItem.id==newItem.id
+            return oldItem.id == newItem.id
         }
 
     }
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) { val binding = JokeItemViewBinding.bind(holder.itemView)
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val binding = JokeItemViewBinding.bind(holder.itemView)
         binding.textView.text = getItem(position)?.value
         binding.imageView.load(getItem(position)?.iconUrl) {
             crossfade(true)
@@ -37,5 +41,6 @@ class JokePagingAdapter: PagingDataAdapter<JokeResponse,RecyclerView.ViewHolder>
         return JokePagingViewHolder(view)
 
     }
-    inner class JokePagingViewHolder(view:View) : RecyclerView.ViewHolder(view)
+
+    inner class JokePagingViewHolder(view: View) : RecyclerView.ViewHolder(view)
 }

@@ -1,15 +1,10 @@
 package com.example.jokeapi.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.activity.viewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.room.Room
+import androidx.appcompat.app.AppCompatActivity
 import com.example.jokeapi.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.*
-import java.util.zip.Inflater
+
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null

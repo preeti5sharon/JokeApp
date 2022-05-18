@@ -1,4 +1,4 @@
-package com.example.jokeapi
+package com.example.jokeapi.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
+import com.example.jokeapi.R
 import com.example.jokeapi.api.data.JokeResponse
 import com.example.jokeapi.databinding.JokeItemViewBinding
 

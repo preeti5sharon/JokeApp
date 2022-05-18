@@ -2,15 +2,15 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/secondFragment">
+    app:startDestination="@id/hostFragment">
 
     <fragment
-        android:id="@+id/firstFragment"
-        android:name="com.example.jokeapi.fragment.FirstFragment"
+        android:id="@+id/databaseFragment"
+        android:name="com.example.jokeapi.fragment.DatabaseFragment"
         android:label="FirstFragment" />
     <fragment
-        android:id="@+id/secondFragment"
-        android:name="com.example.jokeapi.fragment.SecondFragment"
+        android:id="@+id/networkFragment"
+        android:name="com.example.jokeapi.fragment.NetworkFragment"
         android:label="SecondFragment" />
     <fragment
         android:id="@+id/hostFragment"

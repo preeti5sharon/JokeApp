@@ -7,5 +7,5 @@ interface JokeService {
     @GET(
         "/jokes/random"
     )
-    suspend fun getRandomJokes() : JokeResponse
+    suspend fun getRandomJokes(): JokeResponse
 }

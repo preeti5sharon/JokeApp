@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Network"
-        android:id="@+id/secondFragment"
-        android:icon="@drawable/ic_baseline_ac_unit_24"/>
-    <item android:title="Database"
-        android:id="@+id/firstFragment"
-        android:icon="@drawable/ic_baseline_control_camera_24"/>
+    <item
+        android:title="Network"
+        android:id="@+id/networkFragment"
+        android:icon="@drawable/ic_baseline_ac_unit_24" />
+    <item
+        android:title="Database"
+        android:id="@+id/databaseFragment"
+        android:icon="@drawable/ic_baseline_control_camera_24" />
 </menu>

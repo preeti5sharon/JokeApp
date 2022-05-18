@@ -5,13 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import com.example.jokeapi.JokeAdapter
 import com.example.jokeapi.R
-import com.example.jokeapi.databinding.FragmentFirstBinding
 import com.example.jokeapi.databinding.FragmentHostBinding
-import com.example.jokeapi.viewmodel.MainViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,18 +24,18 @@ class HostFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val firstFragment = FirstFragment()
-        val secondFragment = SecondFragment()
+        val firstFragment = DatabaseFragment()
+        val secondFragment = NetworkFragment()
         _binding?.run {
             setFragment(firstFragment)
             bottomNav.setOnNavigationItemSelectedListener {
                 when (it.itemId) {
-                    R.id.firstFragment -> {
+                    R.id.databaseFragment -> {
                         setFragment(firstFragment)
                         // Respond to navigation item 1 click
                         true
                     }
-                    R.id.secondFragment -> {
+                    R.id.networkFragment -> {
                         setFragment(secondFragment)
                         // Respond to navigation item 2 click
                         true

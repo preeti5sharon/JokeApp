@@ -7,24 +7,22 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.jokeapi.JokeAdapter
-import com.example.jokeapi.databinding.FragmentFirstBinding
-import com.example.jokeapi.databinding.FragmentSecondBinding
-import com.example.jokeapi.viewmodel.MainViewModel
-import com.example.jokeapi.viewmodel.SecondViewModel
+import com.example.jokeapi.adapter.JokeAdapter
+import com.example.jokeapi.databinding.FragmentNetworkBinding
+import com.example.jokeapi.viewmodel.NetworkViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SecondFragment : Fragment() {
+class NetworkFragment : Fragment() {
     private val jokeAdapter = JokeAdapter()
-    private var _binding: FragmentSecondBinding? = null
-    private val viewModel: SecondViewModel by viewModels()
+    private var _binding: FragmentNetworkBinding? = null
+    private val viewModel: NetworkViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentSecondBinding.inflate(inflater)
+        _binding = FragmentNetworkBinding.inflate(inflater)
         return _binding?.root
 
     }
