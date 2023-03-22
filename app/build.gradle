@@ -1,8 +1,14 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+
+    id 'com.google.firebase.firebase-perf'
+    id 'com.google.firebase.crashlytics'
+
     id('kotlin-kapt')
     id('dagger.hilt.android.plugin')
+
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -22,6 +28,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            FirebasePerformance {
+                instrumentationEnabled true
+            }
         }
     }
     compileOptions {
@@ -67,6 +78,11 @@ dependencies {
     implementation("io.coil-kt:coil:2.0.0-rc03")
     kapt "androidx.room:room-compiler:2.5.0"
     implementation("androidx.fragment:fragment-ktx:1.5.5")
+
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:31.2.3')
+    implementation "com.google.firebase:firebase-perf-ktx"
+    implementation "com.google.firebase:firebase-config-ktx"
 
     lintChecks project(':custom-lint')
 }
