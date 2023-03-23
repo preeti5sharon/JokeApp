@@ -20,15 +20,20 @@ class NetworkFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentNetworkBinding.inflate(inflater)
         return _binding?.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setNetworkUI()
+        setAdapter()
+        observeFlowData()
+    }
+
+    private fun setNetworkUI() {
         _binding?.progressBar?.isVisible = true
         _binding?.swipeRefresh?.setOnRefreshListener {
             viewModel.fetchInitialData()
@@ -36,9 +41,14 @@ class NetworkFragment : Fragment() {
 
             _binding?.progressBar?.isVisible = true
         }
-        viewModel.fetchInitialData()
+    }
+
+    private fun setAdapter() {
         _binding?.recyclerView?.adapter = jokeAdapter
-        viewModel.jokeLiveData.observe(viewLifecycleOwner) { jokes ->
+    }
+
+    private fun observeFlowData() {
+        viewModel.jokeFlowData.observe(viewLifecycleOwner) { jokes ->
             jokeAdapter.jokeList = jokes
             jokeAdapter.notifyDataSetChanged()
             _binding?.progressBar?.isVisible = false
@@ -46,7 +56,7 @@ class NetworkFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         _binding = null
+        super.onDestroyView()
     }
 }

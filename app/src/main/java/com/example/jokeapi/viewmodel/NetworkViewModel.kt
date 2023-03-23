@@ -13,14 +13,16 @@ import javax.inject.Inject
 @HiltViewModel
 class NetworkViewModel @Inject constructor(
 
-    private val repository: JokeRepository
+    private val repository: JokeRepository,
 ) : ViewModel() {
-    val jokeLiveData = MutableLiveData<List<JokeResponse>>()
+    val jokeFlowData = MutableLiveData<List<JokeResponse>>()
     fun fetchInitialData() {
         viewModelScope.launch(Dispatchers.IO) {
-
-            jokeLiveData.postValue(repository.fetchDataFromNetwork())
-
+            jokeFlowData.postValue(repository.fetchDataFromNetwork())
         }
+    }
+
+    init {
+        fetchInitialData()
     }
 }

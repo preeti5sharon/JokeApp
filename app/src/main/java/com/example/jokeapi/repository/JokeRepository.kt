@@ -13,7 +13,7 @@ class JokeRepository(
     private val database: JokeDB,
     private val api: JokeService
 ) {
-    private val pagingConfig = PagingConfig(10, 7, false, 20)
+    private val pagingConfig = PagingConfig(10, 10, false, 20)
     fun fetchDataFromDatabase(): LiveData<PagingData<JokeResponse>> {
         return Pager(config = pagingConfig, 0) {
             database.getJokeDAO().getRandomJokes()
