@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.jokeapi.adapter.JokeAdapter
 import com.example.jokeapi.databinding.FragmentNetworkBinding
 import com.example.jokeapi.viewmodel.NetworkViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class NetworkFragment : Fragment() {
@@ -48,10 +50,12 @@ class NetworkFragment : Fragment() {
     }
 
     private fun observeFlowData() {
-        viewModel.jokeFlowData.observe(viewLifecycleOwner) { jokes ->
-            jokeAdapter.jokeList = jokes
-            jokeAdapter.notifyDataSetChanged()
-            _binding?.progressBar?.isVisible = false
+        lifecycleScope.launch {
+            viewModel.jokeFlowData.collect { jokes ->
+                jokeAdapter.jokeList = jokes
+                jokeAdapter.notifyDataSetChanged()
+                _binding?.progressBar?.isVisible = false
+            }
         }
     }
 

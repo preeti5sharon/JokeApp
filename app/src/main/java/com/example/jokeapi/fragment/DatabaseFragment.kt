@@ -16,7 +16,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-
 class DatabaseFragment : Fragment() {
     private val jokeAdapter = JokePagingAdapter()
     private var _binding: FragmentDatabaseBinding? = null
@@ -24,18 +23,18 @@ class DatabaseFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentDatabaseBinding.inflate(inflater)
         return _binding?.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding?.recyclerView?.adapter = jokeAdapter
-        viewModel.fetchInitialData().observe(viewLifecycleOwner) { jokes ->
-            lifecycleScope.launch {
+
+        lifecycleScope.launch {
+            viewModel.fetchInitialData().collect { jokes ->
                 jokeAdapter.submitData(jokes)
             }
         }
