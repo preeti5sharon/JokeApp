@@ -12,6 +12,12 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+buildCache {
+    local {
+        enabled = true
+        setRemoveUnusedEntriesAfterDays(30)
+    }
+}
 rootProject.name = "Joke API"
 include ':app'
 include ':custom-lint'
